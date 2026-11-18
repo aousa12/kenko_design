@@ -1,2 +1,16 @@
-# kenko_design
-健康デザインアプリ
+# 手札(kenko_design)
+
+主体的健康管理のためのカード式Webアプリ(石川葵・修士研究)。
+
+- 参加者用: https://aousa12.github.io/kenko_design/
+- 研究者用(見る専用): https://aousa12.github.io/kenko_design/#view  ←参加者のバックアップコードを貼ると、その人の画面が見られます。保存・送信はされません。
+
+## 参加者への案内(要点)
+1. 上のURLを、iPhoneの「Safari」で開く。
+2. 共有ボタン →「ホーム画面に追加」。
+3. **ホーム画面にできたアイコンから開いて、はじめる**(Safariのままだと、記録が消えることがあります)。
+4. 4日目の夜と、8日目の最後に、バックアップを送る。
+
+## 構成
+- `index.html` … アプリ本体(1ファイル)
+- `manifest.webmanifest`, `icon-*.png` … ホーム画面に追加するための設定
