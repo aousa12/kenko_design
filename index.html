@@ -267,7 +267,7 @@ html,body{background:var(--outer)}
 .dayof.dt{font-size:16px;font-weight:700;color:var(--ink2);margin-left:10px}
 .notday{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;background:#FFF6D6;border:2px solid #F2C24B;border-radius:18px;padding:8px 8px 8px 14px;font-size:13px;font-weight:700;color:var(--ink)}
 .notday button{height:32px;padding:0 12px;border-radius:16px;background:#fff;border:1.5px solid #F2C24B;font-size:12px;font-weight:700;flex:none}
-.prog{margin-top:14px;border-radius:28px;padding:16px 18px;background:#fff;border:2px solid var(--bd4)}
+.prog{margin-top:12px;border-radius:28px;padding:16px 18px;background:#fff;border:2px solid var(--bd4)}
 .prog .t{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
 .prog .t b{font-size:20px}
 .prog .t b em{font-style:normal;font-size:28px;color:var(--o1);margin-right:2px}
@@ -299,10 +299,10 @@ html,body{background:var(--outer)}
 .dayans.ask{background:linear-gradient(180deg,#E55C00,#EA7B0C);border:0;color:#fff;justify-content:space-between;padding:16px 18px}
 .dayans.ask .t{font-size:18px}
 .dayans.ask .s{color:#fff}
-.tmrcard{margin-top:22px;border-radius:28px;padding:16px 18px;background:#EEF2FD;display:flex;align-items:center;gap:14px;width:100%;text-align:left}
+.tmrcard{margin-top:22px;border-radius:28px;padding:16px 18px;background:#EEF4FF;border:2px solid #4A88E6;display:flex;align-items:center;gap:14px;width:100%;text-align:left}
 .tmrcard .t{font-size:16px;font-weight:700;color:#1B3FA0}
 .tmrcard .s{font-size:12px;line-height:17px;color:#4A5C95;margin-top:2px}
-.tmrcard.done{background:#E4EBFC;align-items:flex-start}
+.tmrcard.done{background:#E3EBFC;align-items:flex-start}
 .tmrcard .mini{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .tmrcard .mini span{width:34px;height:34px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center}
 .tmrcard .mini img{max-width:24px;max-height:24px}
@@ -318,14 +318,14 @@ html,body{background:var(--outer)}
 .seg{display:flex;background:var(--dis);border-radius:24px;padding:4px;margin:14px 0 14px}
 .seg button{flex:1;height:44px;border-radius:20px;font-size:13px;font-weight:700;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;text-align:center}
 .seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 5px rgba(60,50,70,.15)}
-.seg .n{min-width:18px;height:18px;border-radius:9px;background:#5D5D5D;color:#fff;font-size:11px;line-height:18px;text-align:center;padding:0 5px}
+.seg .n{min-width:18px;height:18px;border-radius:9px;background:#8B6B55;color:#fff;font-size:11px;line-height:18px;text-align:center;padding:0 5px}
 .note2{font-size:12px;line-height:18px;color:var(--muted);margin:0 0 14px}
 .trow.sel{background:var(--selbg);border-color:var(--selbd)}
 .ck{width:30px;height:30px;border-radius:50%;border:2.5px solid var(--bd2);background:#fff;flex:none;display:flex;align-items:center;justify-content:center;color:#fff}
 .sel .ck{background:#E55C00;border-color:#E55C00}
 .stt.back2{background:#fff;border:2px solid #8A6A55;color:#6E5240}
 .actbar{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:430px;z-index:30;background:var(--bg);border-top:1px solid var(--bd4);padding:16px var(--gx2) calc(20px + env(safe-area-inset-bottom,0px)) var(--gx)}
-.actbar button{width:100%;height:56px;border-radius:28px;background:#8A6A55;color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;text-align:center}
+.actbar button{width:100%;height:56px;border-radius:28px;background:#5D5D5D;color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;text-align:center}
 .actbar button[disabled]{background:var(--dis);color:var(--disx)}
 .empty2{padding:40px 0;text-align:center;color:var(--muted);font-size:13px}
 /* setup extras */
@@ -353,6 +353,29 @@ html,body{background:var(--outer)}
 .codebox[data-bind]{font-size:16px}
 .field{font-size:16px}
 .h26{white-space:normal}
+
+/* tutorial */
+.screen[data-screen=tutorial]{padding-bottom:0}
+.tut{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ttop{display:flex;align-items:center;justify-content:space-between;margin-top:22px;height:48px}
+.ttop .back{margin:0}
+.tcnt{font-size:12px;color:var(--muted);font-weight:700}
+.skip{height:40px;padding:0 16px;border-radius:20px;background:var(--dis);font-size:13px;font-weight:700;color:var(--ink2);min-width:44px}
+.ttl{font-size:23px;line-height:36px;font-weight:700;margin:22px 0 0;text-align:center;text-wrap:balance;word-break:auto-phrase}
+.ttl em{font-style:normal;color:#E55C00}
+.tvis{position:relative;flex:1;min-height:380px;margin:8px -4px 0}
+.tc,.tbk{position:absolute;left:50%;top:22px;width:238px;height:366px;margin-left:-119px;border-radius:34px}
+.tbk{opacity:.92;top:34px;box-shadow:0 10px 24px rgba(60,40,50,.16)}
+.tc{background:#fff;overflow:hidden;box-shadow:0 16px 34px rgba(60,40,50,.2);border:5px solid #fff;transition:transform .35s ease}
+.tc img{display:block;width:100%;height:auto;pointer-events:none}
+.tc .fade{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(255,255,255,0),#fff 92%)}
+.tbot{display:flex;flex-direction:column;align-items:center;padding:6px 0 calc(22px + env(safe-area-inset-bottom,0px))}
+.tnext{position:relative;width:84px;height:84px;display:flex;align-items:center;justify-content:center}
+.tnext .ring{position:absolute;inset:0}
+.tnext .dot{width:62px;height:62px;border-radius:50%;background:linear-gradient(180deg,#E55C00,#EA7B0C);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(229,92,0,.35)}
+.thint{margin:6px 0 0;font-size:12px;color:var(--muted)}
+.tlast{padding:14px 0 calc(24px + env(safe-area-inset-bottom,0px))}
+@media (prefers-reduced-motion:reduce){.tc{transition:none}}
 
 </style></head><body>
 <div id="app"></div>
@@ -399,6 +422,14 @@ var HINT_CARDS=[
  {c:'meal',t:'AIに、自分がやった方が良い健康行動を聞いてみる？'},
  {c:'sleep',t:'最近の健康の悩みは？'},
  {c:'other',t:'インターネットで調べてみる？'}
+];
+var TUT=[
+ {c:'exercise',t:'これは、自分で毎日、<br>今日行いたい健康行動を<br>考えて、選んで、実践する、<br><em>健康デザインツール</em>です。'},
+ {c:'meal',t:'毎日、今日取り組みたい<em>健康行動を選びます</em>。'},
+ {c:'other',t:'カードを<em>新しく追加</em>したり、<em>書き換え</em>たりすることもできます。'},
+ {c:'sleep',t:'その日のおわりに、<br>今日とりくんだカードについて<br><em>記録</em>をとります。'},
+ {c:'exercise',t:'今日の様子を踏まえて、<br>明日以降に取り組む、<br><em>また新しいカード</em>を<br>作成することもできます。'},
+ {c:'meal',t:'まずは、<em>カードをつくって</em>みましょう。'}
 ];
 var DEMO=[
  {title:'夕方に10分歩く',category:'exercise',dayType:'tight',source:'友人のすすめ'},
@@ -548,6 +579,16 @@ V.welcome=function(){
   '<p class="note">本名でなくてかまいません。</p><button class="link" style="margin:26px 0 0;text-align:left;font-size:13px;padding-left:4px" data-a="restore-open">前の記録のコードで、続きから始める</button></div>'+
   '<div class="foot">'+btn('はじめる','welcome-start',{id:'primary',off:!(ui.nick||'').trim()})+'</div>';
 };
+V.tutorial=function(){
+  var i=ui.tut||0,t=TUT[i],last=i===TUT.length-1,tilt=(i%2?3.5:-3.5),col=CATS[t.c].color;
+  var R=34,C=2*Math.PI*R,off=C*(1-(i+1)/TUT.length);
+  var ring='<svg class="ring" width="84" height="84" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="'+R+'" fill="none" stroke="#E7E1DA" stroke-width="4"/><circle cx="42" cy="42" r="'+R+'" fill="none" stroke="#E55C00" stroke-width="4" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 42 42)"/></svg>';
+  var bot=last?'<div class="tlast">'+btn(ui.tutReplay?'とじる':'カードをつくる','tut-done')+'</div>'
+    :'<div class="tbot"><button class="tnext" data-a="tut-next" aria-label="次へ">'+ring+'<span class="dot">'+ARROW+'</span></button><p class="thint">タップして次へ</p></div>';
+  return '<div class="tut" data-a="tut-next"><div class="ttop"><button class="back" data-a="tut-prev" aria-label="もどる">'+CHEV+'</button><span class="tcnt">'+(i+1)+' / '+TUT.length+'</span><button class="skip" data-a="tut-done">'+(ui.tutReplay?'とじる':'スキップ')+'</button></div>'+
+   '<h1 class="ttl">'+t.t+'</h1>'+
+   '<div class="tvis"><div class="tbk" style="background:'+col+';transform:rotate('+(-tilt*1.7).toFixed(1)+'deg)"></div><div class="tc" style="transform:rotate('+tilt+'deg)"><img src="tutorial/'+(i+1)+'.webp" alt="" draggable="false"><span class="fade"></span></div></div>'+bot+'</div>';
+};
 V.welcome.valid=function(){return !!(ui.nick||'').trim();};
 
 function formPanel(){
@@ -651,23 +692,27 @@ V.today=function(){
     if(canEdit)h+='<button class="addrow" style="margin-top:14px" data-a="new-card">'+PLUSO+'カードをつくる</button>';
   }else{
     var n=e.selected.length,k=e.selected.filter(function(id){return e.logged.indexOf(id)>=0;}).length;
+    var progH='',ansH='',bodyH='';
+    if(n&&!e.rested){
+      progH='<div class="prog"><div class="t"><b><em>'+k+'</em>/'+n+' 記録ずみ</b><span>'+(k===n?'この日の分は、終わりです':isFut?'予定です':'寝る前に記録しましょう')+'</span></div><div class="bar">'+e.selected.map(function(id){return '<i class="'+(e.logged.indexOf(id)>=0?'on':'')+'"></i>';}).join('')+'</div></div>';
+    }
     // 今日の日(答え)
     if(e.dayType){
-      h+='<div class="sub2" style="margin-top:20px">'+(isToday?'今日':vd+'日目')+'の日</div>'+
-        '<div class="dayans">'+img('daytype_'+e.dayType)+'<div style="flex:1"><div class="t">'+DT[e.dayType]+'</div><div class="s">選んだ答えです</div></div>'+(canEdit?'<button class="chg" data-a="ask-today">変える</button>':'')+'</div>';
+      ansH='<div class="sub2">'+(isToday?'今日':vd+'日目')+'の日</div>'+
+        '<div class="dayans">'+img('daytype_'+e.dayType)+'<div style="flex:1"><div class="t">'+DT[e.dayType]+'</div><div class="s">'+(isToday?'ホームで選んだ答えです':'選んだ答えです')+'</div></div>'+(canEdit?'<button class="chg" data-a="ask-today">変える</button>':'')+'</div>';
     }else if(canEdit){
-      h+='<button class="dayans ask" style="margin-top:16px" data-a="ask-today"><span><div class="t">今日はどんな日ですか？</div><div class="s">選ぶと、合うカードが先に並びます</div></span>'+CHEVR+'</button>';
+      ansH='<button class="dayans ask" style="margin-top:16px" data-a="ask-today"><span><div class="t">今日はどんな日ですか？</div><div class="s">選ぶと、合うカードが先に並びます</div></span>'+CHEVR+'</button>';
     }else{
-      h+='<div class="infobox">この日の「どんな日か」は、まだ選ばれていません。</div>';
+      ansH='<div class="infobox">この日の「どんな日か」は、まだ選ばれていません。</div>';
     }
     if(e.rested){
-      h+='<div class="infobox warn" style="margin-top:14px"><b>'+(isToday?'今日':vd+'日目')+'はお休みにしました。</b>'+(canEdit?'<br><button data-a="ask-today">やっぱりカードを選ぶ</button>':'')+'</div>';
+      bodyH='<div class="infobox warn" style="margin-top:14px"><b>'+(isToday?'今日':vd+'日目')+'はお休みにしました。</b>'+(canEdit?'<br><button data-a="ask-today">やっぱりカードを選ぶ</button>':'')+'</div>';
     }else if(n){
-      h+='<div class="prog"><div class="t"><b><em>'+k+'</em>/'+n+' 記録ずみ</b><span>'+(k===n?'この日の分は終わりです':isFut?'予定です':'取り組んだら記録しましょう')+'</span></div><div class="bar">'+e.selected.map(function(id){return '<i class="'+(e.logged.indexOf(id)>=0?'on':'')+'"></i>';}).join('')+'</div></div>'+
-        '<div class="sub2">'+(isToday?'今日やること':vd+'日目に選んだカード')+'</div>'+e.selected.map(function(id){return trowHTML(cardById(id),e,vd,isFut,false);}).join('');
+      bodyH='<div class="sub2">'+(isToday?'今日やること':vd+'日目に選んだカード')+'</div>'+e.selected.map(function(id){return trowHTML(cardById(id),e,vd,isFut,false);}).join('');
     }else if(e.dayType&&canEdit){
-      h+='<div class="infobox" style="margin-top:14px">まだカードを選んでいません。</div><button class="btn" style="margin-top:14px" data-a="ask-pick">カードを選ぶ</button>';
+      bodyH='<div class="infobox" style="margin-top:14px">まだカードを選んでいません。</div><button class="btn" style="margin-top:14px" data-a="ask-pick">カードを選ぶ</button>';
     }
+    h+=progH+ansH+bodyH;
     if(canEdit&&e.dayType&&!e.rested&&n)h+='<button class="addrow" data-a="ask-pick">'+PLUSO+'今日のカードを足す</button>';
   }
   // 明日の分
@@ -676,7 +721,7 @@ V.today=function(){
       var tsel=tomorrow.selected.map(function(id){var c=cardById(id);return c?'<span>'+img('category_'+c.category)+'</span>':'';}).join('');
       h+='<button class="tmrcard done" data-a="ask-tmr">'+MOON+'<div style="flex:1"><div class="t">'+(tomorrow.rested?'明日はお休みにします':'明日の分:'+tomorrow.selected.length+'枚 選びました')+'</div><div class="s">'+(tomorrow.dayType?'明日は'+DT[tomorrow.dayType]:'')+'</div>'+(tsel?'<div class="mini">'+tsel+'</div>':'')+'</div><span class="chg2">変える</span></button>';
     }else{
-      h+='<button class="tmrcard" data-a="ask-tmr">'+MOON+'<div><div class="t">明日の分を選ぶ</div><div class="s">夜のうちに選んでおくと、<br>朝がラクになります</div></div></button>';
+      h+='<button class="tmrcard" data-a="ask-tmr">'+MOON+'<div><div class="t">明日の分を選ぶ</div><div class="s">夜のうちに明日のカードを<br>選んでおくこともできます</div></div></button>';
     }
   }
   if(VIEW&&vd>=2){/* 閲覧時は、明日の分の状況も見せる */
@@ -688,7 +733,7 @@ V.today=function(){
   if(!VIEW&&isToday){
     if(rn>=4&&!(S.flags&&S.flags.b4)&&rn<TOTAL)h+='<div class="infobox warn"><b>ここまでの記録を、バックアップしましょう。</b><br>万が一の時に備えて、一度だけお願いします。<br><button data-a="backup-open">バックアップをとる</button></div>';
     if(rn===TOTAL)h+='<div class="infobox warn"><b>最終日です。おつかれさまです。</b><br>最後に、記録のバックアップを送ってください。<br><button data-a="finish-open">おわりの画面へ</button></div>';
-    h+='<button class="link" style="margin-top:26px;font-size:13px;font-weight:400" data-a="backup-open">記録をバックアップする</button>';
+    h+='<div style="display:flex;gap:22px;justify-content:center;margin-top:26px"><button class="link" style="margin:0;font-size:13px;font-weight:400" data-a="backup-open">記録をバックアップする</button><button class="link" style="margin:0;font-size:13px;font-weight:400" data-a="tut-open">使い方を見る</button></div>';
   }
   return vbar()+head+h+tabbar('today');
 };
@@ -696,8 +741,8 @@ function trowHTML(c,e,dn,isFut,yest){
   if(!c)return '';
   var logged=e.logged.indexOf(c.id)>=0,lg=logged?logFor(c.id,dn):null,st;
   if(logged&&lg){
-    var t='<span class="stt done'+(lg.fit==='no'?' no':'')+'">'+CHK+(lg.fit==='yes'?'合っている':'合っていない')+'</span>';
-    st=VIEW?t:'<button class="stt done'+(lg.fit==='no'?' no':'')+'" data-a="rec-open" data-id="'+c.id+'" data-d="'+dn+'">'+CHK+(lg.fit==='yes'?'合っている':'合っていない')+'</button>';
+    var t='<span class="stt done'+(lg.fit==='no'?' no':'')+'">'+CHK+(lg.fit==='yes'?'合っていた':'合わなかった')+'</span>';
+    st=VIEW?t:'<button class="stt done'+(lg.fit==='no'?' no':'')+'" data-a="rec-open" data-id="'+c.id+'" data-d="'+dn+'">'+CHK+(lg.fit==='yes'?'合っていた':'合わなかった')+'</button>';
   }else if(isFut){st='<span class="stt plan">予定</span>';}
   else if(VIEW){st='<span class="stt plan">未記録</span>';}
   else st='<button class="stt todo" data-a="rec-open" data-id="'+c.id+'" data-d="'+dn+'">記録する</button>';
@@ -806,7 +851,7 @@ V.trash=function(){
     var live=liveCards(),k=live.filter(function(c){return sel[c.id];}).length;
     var rows=live.map(function(c){return '<button class="trow cat-'+c.category+(sel[c.id]?' sel':'')+'" data-a="trash-toggle" data-id="'+c.id+'"><div class="ic">'+img('category_'+c.category)+'</div><div class="tx"><div class="k">'+CATS[c.category].label+'</div><div class="tt">'+esc(c.title)+'</div></div><span class="ck">'+(sel[c.id]?CHK:'')+'</span></button>';}).join('');
     return head+'<p class="note2">捨てたいカードを選んでください。<br>捨てても、記録は残ります。ゴミ箱から、いつでも戻せます。</p>'+(rows||'<div class="empty2">捨てられるカードがありません。</div>')+
-     (VIEW?'':'<div class="actbar"><button data-a="trash-do" '+(k?'':'disabled')+'>'+(k?k+'枚をゴミ箱に入れる':'カードを選んでください')+'</button></div>');
+     (VIEW?'':'<div class="actbar"><button data-a="trash-do" '+(k?'':'disabled')+'>'+(k?img('trash',0.9)+k+'枚をゴミ箱に入れる':'カードを選んでください')+'</button></div>');
   }
   var rows2=tl.map(function(c){var d=new Date(c.trashedAt||0);return '<div class="trow cat-'+c.category+'"><div class="ic">'+img('category_'+c.category)+'</div><div class="tx"><div class="k">'+CATS[c.category].label+'</div><div class="tt">'+esc(c.title)+'</div><div class="dt2">'+(d.getMonth()+1)+'/'+d.getDate()+'に捨てました</div></div>'+(VIEW?'':'<button class="stt back2" data-a="trash-restore" data-id="'+c.id+'">もどす</button>')+'</div>';}).join('');
   return head+'<p class="note2">捨てたカードの中身です。'+(VIEW?'':'「もどす」を押すと、手札に戻ります。')+'</p>'+(tl.length?rows2:'<div class="empty2">ゴミ箱は、空です。</div>');
@@ -909,6 +954,15 @@ var A={
   'welcome-start':function(){
     var nick=(ui.nick||'').trim();if(!nick)return;
     S.user={nickname:nick,startDate:dateKey()};save();ev('start',{nickname:nick});
+    draft=blankDraft();
+    if(!(S.flags&&S.flags.tutDone)){ui.tut=0;ui.tutReplay=false;go('tutorial');}else reset('setup');
+  },
+  'tut-next':function(){if((ui.tut||0)>=TUT.length-1)return;ui.tut=(ui.tut||0)+1;dir='fwd';render(true);},
+  'tut-prev':function(){if((ui.tut||0)>0){ui.tut--;dir='bk';render(true);}else if(stack.length)back();},
+  'tut-open':function(){ui.tut=0;ui.tutReplay=true;go('tutorial');},
+  'tut-done':function(){
+    S.flags=S.flags||{};S.flags.tutDone=1;save();
+    if(ui.tutReplay){ui.tutReplay=false;back();return;}
     draft=blankDraft();reset('setup');
   },
   'cat':function(el){draft.cat=el.dataset.v;render();},
@@ -1087,6 +1141,7 @@ function openDebug(){
 (function init(){
   if(VIEW)screen='vstart';
   else if(!S.user)screen='welcome';
+  else if(!(S.flags&&S.flags.tutDone)&&liveCards().length===0){screen='tutorial';ui.tut=0;}
   else if(liveCards().length<5&&realNo()===1&&!(S.flags&&S.flags.setupDone))screen='setup';
   else screen='home';
   dir='fwd';render(true);

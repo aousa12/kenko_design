@@ -40,6 +40,14 @@ var HINT_CARDS=[
  {c:'sleep',t:'最近の健康の悩みは？'},
  {c:'other',t:'インターネットで調べてみる？'}
 ];
+var TUT=[
+ {c:'exercise',t:'これは、自分で毎日、<br>今日行いたい健康行動を<br>考えて、選んで、実践する、<br><em>健康デザインツール</em>です。'},
+ {c:'meal',t:'毎日、今日取り組みたい<em>健康行動を選びます</em>。'},
+ {c:'other',t:'カードを<em>新しく追加</em>したり、<em>書き換え</em>たりすることもできます。'},
+ {c:'sleep',t:'その日のおわりに、<br>今日とりくんだカードについて<br><em>記録</em>をとります。'},
+ {c:'exercise',t:'今日の様子を踏まえて、<br>明日以降に取り組む、<br><em>また新しいカード</em>を<br>作成することもできます。'},
+ {c:'meal',t:'まずは、<em>カードをつくって</em>みましょう。'}
+];
 var DEMO=[
  {title:'夕方に10分歩く',category:'exercise',dayType:'tight',source:'友人のすすめ'},
  {title:'朝にヨーグルトを食べる',category:'meal',dayType:'tight',source:''},
@@ -188,6 +196,16 @@ V.welcome=function(){
   '<p class="note">本名でなくてかまいません。</p><button class="link" style="margin:26px 0 0;text-align:left;font-size:13px;padding-left:4px" data-a="restore-open">前の記録のコードで、続きから始める</button></div>'+
   '<div class="foot">'+btn('はじめる','welcome-start',{id:'primary',off:!(ui.nick||'').trim()})+'</div>';
 };
+V.tutorial=function(){
+  var i=ui.tut||0,t=TUT[i],last=i===TUT.length-1,tilt=(i%2?3.5:-3.5),col=CATS[t.c].color;
+  var R=34,C=2*Math.PI*R,off=C*(1-(i+1)/TUT.length);
+  var ring='<svg class="ring" width="84" height="84" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="'+R+'" fill="none" stroke="#E7E1DA" stroke-width="4"/><circle cx="42" cy="42" r="'+R+'" fill="none" stroke="#E55C00" stroke-width="4" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 42 42)"/></svg>';
+  var bot=last?'<div class="tlast">'+btn(ui.tutReplay?'とじる':'カードをつくる','tut-done')+'</div>'
+    :'<div class="tbot"><button class="tnext" data-a="tut-next" aria-label="次へ">'+ring+'<span class="dot">'+ARROW+'</span></button><p class="thint">タップして次へ</p></div>';
+  return '<div class="tut" data-a="tut-next"><div class="ttop"><button class="back" data-a="tut-prev" aria-label="もどる">'+CHEV+'</button><span class="tcnt">'+(i+1)+' / '+TUT.length+'</span><button class="skip" data-a="tut-done">'+(ui.tutReplay?'とじる':'スキップ')+'</button></div>'+
+   '<h1 class="ttl">'+t.t+'</h1>'+
+   '<div class="tvis"><div class="tbk" style="background:'+col+';transform:rotate('+(-tilt*1.7).toFixed(1)+'deg)"></div><div class="tc" style="transform:rotate('+tilt+'deg)"><img src="tutorial/'+(i+1)+'.webp" alt="" draggable="false"><span class="fade"></span></div></div>'+bot+'</div>';
+};
 V.welcome.valid=function(){return !!(ui.nick||'').trim();};
 
 function formPanel(){
@@ -291,23 +309,27 @@ V.today=function(){
     if(canEdit)h+='<button class="addrow" style="margin-top:14px" data-a="new-card">'+PLUSO+'カードをつくる</button>';
   }else{
     var n=e.selected.length,k=e.selected.filter(function(id){return e.logged.indexOf(id)>=0;}).length;
+    var progH='',ansH='',bodyH='';
+    if(n&&!e.rested){
+      progH='<div class="prog"><div class="t"><b><em>'+k+'</em>/'+n+' 記録ずみ</b><span>'+(k===n?'この日の分は、終わりです':isFut?'予定です':'寝る前に記録しましょう')+'</span></div><div class="bar">'+e.selected.map(function(id){return '<i class="'+(e.logged.indexOf(id)>=0?'on':'')+'"></i>';}).join('')+'</div></div>';
+    }
     // 今日の日(答え)
     if(e.dayType){
-      h+='<div class="sub2" style="margin-top:20px">'+(isToday?'今日':vd+'日目')+'の日</div>'+
-        '<div class="dayans">'+img('daytype_'+e.dayType)+'<div style="flex:1"><div class="t">'+DT[e.dayType]+'</div><div class="s">選んだ答えです</div></div>'+(canEdit?'<button class="chg" data-a="ask-today">変える</button>':'')+'</div>';
+      ansH='<div class="sub2">'+(isToday?'今日':vd+'日目')+'の日</div>'+
+        '<div class="dayans">'+img('daytype_'+e.dayType)+'<div style="flex:1"><div class="t">'+DT[e.dayType]+'</div><div class="s">'+(isToday?'ホームで選んだ答えです':'選んだ答えです')+'</div></div>'+(canEdit?'<button class="chg" data-a="ask-today">変える</button>':'')+'</div>';
     }else if(canEdit){
-      h+='<button class="dayans ask" style="margin-top:16px" data-a="ask-today"><span><div class="t">今日はどんな日ですか？</div><div class="s">選ぶと、合うカードが先に並びます</div></span>'+CHEVR+'</button>';
+      ansH='<button class="dayans ask" style="margin-top:16px" data-a="ask-today"><span><div class="t">今日はどんな日ですか？</div><div class="s">選ぶと、合うカードが先に並びます</div></span>'+CHEVR+'</button>';
     }else{
-      h+='<div class="infobox">この日の「どんな日か」は、まだ選ばれていません。</div>';
+      ansH='<div class="infobox">この日の「どんな日か」は、まだ選ばれていません。</div>';
     }
     if(e.rested){
-      h+='<div class="infobox warn" style="margin-top:14px"><b>'+(isToday?'今日':vd+'日目')+'はお休みにしました。</b>'+(canEdit?'<br><button data-a="ask-today">やっぱりカードを選ぶ</button>':'')+'</div>';
+      bodyH='<div class="infobox warn" style="margin-top:14px"><b>'+(isToday?'今日':vd+'日目')+'はお休みにしました。</b>'+(canEdit?'<br><button data-a="ask-today">やっぱりカードを選ぶ</button>':'')+'</div>';
     }else if(n){
-      h+='<div class="prog"><div class="t"><b><em>'+k+'</em>/'+n+' 記録ずみ</b><span>'+(k===n?'この日の分は終わりです':isFut?'予定です':'取り組んだら記録しましょう')+'</span></div><div class="bar">'+e.selected.map(function(id){return '<i class="'+(e.logged.indexOf(id)>=0?'on':'')+'"></i>';}).join('')+'</div></div>'+
-        '<div class="sub2">'+(isToday?'今日やること':vd+'日目に選んだカード')+'</div>'+e.selected.map(function(id){return trowHTML(cardById(id),e,vd,isFut,false);}).join('');
+      bodyH='<div class="sub2">'+(isToday?'今日やること':vd+'日目に選んだカード')+'</div>'+e.selected.map(function(id){return trowHTML(cardById(id),e,vd,isFut,false);}).join('');
     }else if(e.dayType&&canEdit){
-      h+='<div class="infobox" style="margin-top:14px">まだカードを選んでいません。</div><button class="btn" style="margin-top:14px" data-a="ask-pick">カードを選ぶ</button>';
+      bodyH='<div class="infobox" style="margin-top:14px">まだカードを選んでいません。</div><button class="btn" style="margin-top:14px" data-a="ask-pick">カードを選ぶ</button>';
     }
+    h+=progH+ansH+bodyH;
     if(canEdit&&e.dayType&&!e.rested&&n)h+='<button class="addrow" data-a="ask-pick">'+PLUSO+'今日のカードを足す</button>';
   }
   // 明日の分
@@ -316,7 +338,7 @@ V.today=function(){
       var tsel=tomorrow.selected.map(function(id){var c=cardById(id);return c?'<span>'+img('category_'+c.category)+'</span>':'';}).join('');
       h+='<button class="tmrcard done" data-a="ask-tmr">'+MOON+'<div style="flex:1"><div class="t">'+(tomorrow.rested?'明日はお休みにします':'明日の分:'+tomorrow.selected.length+'枚 選びました')+'</div><div class="s">'+(tomorrow.dayType?'明日は'+DT[tomorrow.dayType]:'')+'</div>'+(tsel?'<div class="mini">'+tsel+'</div>':'')+'</div><span class="chg2">変える</span></button>';
     }else{
-      h+='<button class="tmrcard" data-a="ask-tmr">'+MOON+'<div><div class="t">明日の分を選ぶ</div><div class="s">夜のうちに選んでおくと、<br>朝がラクになります</div></div></button>';
+      h+='<button class="tmrcard" data-a="ask-tmr">'+MOON+'<div><div class="t">明日の分を選ぶ</div><div class="s">夜のうちに明日のカードを<br>選んでおくこともできます</div></div></button>';
     }
   }
   if(VIEW&&vd>=2){/* 閲覧時は、明日の分の状況も見せる */
@@ -328,7 +350,7 @@ V.today=function(){
   if(!VIEW&&isToday){
     if(rn>=4&&!(S.flags&&S.flags.b4)&&rn<TOTAL)h+='<div class="infobox warn"><b>ここまでの記録を、バックアップしましょう。</b><br>万が一の時に備えて、一度だけお願いします。<br><button data-a="backup-open">バックアップをとる</button></div>';
     if(rn===TOTAL)h+='<div class="infobox warn"><b>最終日です。おつかれさまです。</b><br>最後に、記録のバックアップを送ってください。<br><button data-a="finish-open">おわりの画面へ</button></div>';
-    h+='<button class="link" style="margin-top:26px;font-size:13px;font-weight:400" data-a="backup-open">記録をバックアップする</button>';
+    h+='<div style="display:flex;gap:22px;justify-content:center;margin-top:26px"><button class="link" style="margin:0;font-size:13px;font-weight:400" data-a="backup-open">記録をバックアップする</button><button class="link" style="margin:0;font-size:13px;font-weight:400" data-a="tut-open">使い方を見る</button></div>';
   }
   return vbar()+head+h+tabbar('today');
 };
@@ -336,8 +358,8 @@ function trowHTML(c,e,dn,isFut,yest){
   if(!c)return '';
   var logged=e.logged.indexOf(c.id)>=0,lg=logged?logFor(c.id,dn):null,st;
   if(logged&&lg){
-    var t='<span class="stt done'+(lg.fit==='no'?' no':'')+'">'+CHK+(lg.fit==='yes'?'合っている':'合っていない')+'</span>';
-    st=VIEW?t:'<button class="stt done'+(lg.fit==='no'?' no':'')+'" data-a="rec-open" data-id="'+c.id+'" data-d="'+dn+'">'+CHK+(lg.fit==='yes'?'合っている':'合っていない')+'</button>';
+    var t='<span class="stt done'+(lg.fit==='no'?' no':'')+'">'+CHK+(lg.fit==='yes'?'合っていた':'合わなかった')+'</span>';
+    st=VIEW?t:'<button class="stt done'+(lg.fit==='no'?' no':'')+'" data-a="rec-open" data-id="'+c.id+'" data-d="'+dn+'">'+CHK+(lg.fit==='yes'?'合っていた':'合わなかった')+'</button>';
   }else if(isFut){st='<span class="stt plan">予定</span>';}
   else if(VIEW){st='<span class="stt plan">未記録</span>';}
   else st='<button class="stt todo" data-a="rec-open" data-id="'+c.id+'" data-d="'+dn+'">記録する</button>';
@@ -446,7 +468,7 @@ V.trash=function(){
     var live=liveCards(),k=live.filter(function(c){return sel[c.id];}).length;
     var rows=live.map(function(c){return '<button class="trow cat-'+c.category+(sel[c.id]?' sel':'')+'" data-a="trash-toggle" data-id="'+c.id+'"><div class="ic">'+img('category_'+c.category)+'</div><div class="tx"><div class="k">'+CATS[c.category].label+'</div><div class="tt">'+esc(c.title)+'</div></div><span class="ck">'+(sel[c.id]?CHK:'')+'</span></button>';}).join('');
     return head+'<p class="note2">捨てたいカードを選んでください。<br>捨てても、記録は残ります。ゴミ箱から、いつでも戻せます。</p>'+(rows||'<div class="empty2">捨てられるカードがありません。</div>')+
-     (VIEW?'':'<div class="actbar"><button data-a="trash-do" '+(k?'':'disabled')+'>'+(k?k+'枚をゴミ箱に入れる':'カードを選んでください')+'</button></div>');
+     (VIEW?'':'<div class="actbar"><button data-a="trash-do" '+(k?'':'disabled')+'>'+(k?img('trash',0.9)+k+'枚をゴミ箱に入れる':'カードを選んでください')+'</button></div>');
   }
   var rows2=tl.map(function(c){var d=new Date(c.trashedAt||0);return '<div class="trow cat-'+c.category+'"><div class="ic">'+img('category_'+c.category)+'</div><div class="tx"><div class="k">'+CATS[c.category].label+'</div><div class="tt">'+esc(c.title)+'</div><div class="dt2">'+(d.getMonth()+1)+'/'+d.getDate()+'に捨てました</div></div>'+(VIEW?'':'<button class="stt back2" data-a="trash-restore" data-id="'+c.id+'">もどす</button>')+'</div>';}).join('');
   return head+'<p class="note2">捨てたカードの中身です。'+(VIEW?'':'「もどす」を押すと、手札に戻ります。')+'</p>'+(tl.length?rows2:'<div class="empty2">ゴミ箱は、空です。</div>');
@@ -549,6 +571,15 @@ var A={
   'welcome-start':function(){
     var nick=(ui.nick||'').trim();if(!nick)return;
     S.user={nickname:nick,startDate:dateKey()};save();ev('start',{nickname:nick});
+    draft=blankDraft();
+    if(!(S.flags&&S.flags.tutDone)){ui.tut=0;ui.tutReplay=false;go('tutorial');}else reset('setup');
+  },
+  'tut-next':function(){if((ui.tut||0)>=TUT.length-1)return;ui.tut=(ui.tut||0)+1;dir='fwd';render(true);},
+  'tut-prev':function(){if((ui.tut||0)>0){ui.tut--;dir='bk';render(true);}else if(stack.length)back();},
+  'tut-open':function(){ui.tut=0;ui.tutReplay=true;go('tutorial');},
+  'tut-done':function(){
+    S.flags=S.flags||{};S.flags.tutDone=1;save();
+    if(ui.tutReplay){ui.tutReplay=false;back();return;}
     draft=blankDraft();reset('setup');
   },
   'cat':function(el){draft.cat=el.dataset.v;render();},
@@ -727,6 +758,7 @@ function openDebug(){
 (function init(){
   if(VIEW)screen='vstart';
   else if(!S.user)screen='welcome';
+  else if(!(S.flags&&S.flags.tutDone)&&liveCards().length===0){screen='tutorial';ui.tut=0;}
   else if(liveCards().length<5&&realNo()===1&&!(S.flags&&S.flags.setupDone))screen='setup';
   else screen='home';
   dir='fwd';render(true);
