@@ -41,12 +41,12 @@ var HINT_CARDS=[
  {c:'other',t:'インターネットで調べてみる？'}
 ];
 var TUT=[
- {c:'exercise',t:'これは、自分で毎日、<br>今日行いたい健康行動を<br>考えて、選んで、実践する、<br><em>健康デザインツール</em>です。'},
- {c:'meal',t:'毎日、今日取り組みたい<em>健康行動を選びます</em>。'},
- {c:'other',t:'カードを<em>新しく追加</em>したり、<em>書き換え</em>たりすることもできます。'},
- {c:'sleep',t:'その日のおわりに、<br>今日とりくんだカードについて<br><em>記録</em>をとります。'},
- {c:'exercise',t:'今日の様子を踏まえて、<br>明日以降に取り組む、<br><em>また新しいカード</em>を<br>作成することもできます。'},
- {c:'meal',t:'まずは、<em>カードをつくって</em>みましょう。'}
+ {c:'exercise',y:237,t:'これは、今日行いたい健康行動を<br>考えて、選んで、実践する<br><em>健康デザインツールです</em>。'},
+ {c:'meal',y:226,t:'毎日、今日取り組みたい<br><em>健康行動を選びます</em>。'},
+ {c:'other',y:235,t:'カードを<em>新しく追加</em>したり、<br><em>書き換え</em>たりすることもできます。'},
+ {c:'sleep',y:243,t:'その日のおわりに、<br>今日取り組んだカードについて<br><em>記録をとります</em>。'},
+ {c:'exercise',y:226,t:'今日の様子を踏まえて、明日以降に<br>取り組む、<em>また新しいカード</em>を<br>作成することもできます。'},
+ {c:'meal',y:226,t:'まずは、カードを作ってみましょう。'}
 ];
 var DEMO=[
  {title:'夕方に10分歩く',category:'exercise',dayType:'tight',source:'友人のすすめ'},
@@ -198,13 +198,13 @@ V.welcome=function(){
 };
 V.tutorial=function(){
   var i=ui.tut||0,t=TUT[i],last=i===TUT.length-1,tilt=(i%2?3.5:-3.5),col=CATS[t.c].color;
-  var R=34,C=2*Math.PI*R,off=C*(1-(i+1)/TUT.length);
+  var R=34,C=2*Math.PI*R,off=0;
   var ring='<svg class="ring" width="84" height="84" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="'+R+'" fill="none" stroke="#E7E1DA" stroke-width="4"/><circle cx="42" cy="42" r="'+R+'" fill="none" stroke="#E55C00" stroke-width="4" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 42 42)"/></svg>';
   var bot=last?'<div class="tlast">'+btn(ui.tutReplay?'とじる':'カードをつくる','tut-done')+'</div>'
     :'<div class="tbot"><button class="tnext" data-a="tut-next" aria-label="次へ">'+ring+'<span class="dot">'+ARROW+'</span></button><p class="thint">タップして次へ</p></div>';
   return '<div class="tut" data-a="tut-next"><div class="ttop"><button class="back" data-a="tut-prev" aria-label="もどる">'+CHEV+'</button><span class="tcnt">'+(i+1)+' / '+TUT.length+'</span><button class="skip" data-a="tut-done">'+(ui.tutReplay?'とじる':'スキップ')+'</button></div>'+
    '<h1 class="ttl">'+t.t+'</h1>'+
-   '<div class="tvis"><div class="tbk" style="background:'+col+';transform:rotate('+(-tilt*1.7).toFixed(1)+'deg)"></div><div class="tc" style="transform:rotate('+tilt+'deg)"><img src="tutorial/'+(i+1)+'.webp" alt="" draggable="false"><span class="fade"></span></div></div>'+bot+'</div>';
+   '<div class="tvis"><div class="tbk" style="top:'+(t.y+12)+'px;background:'+col+';transform:rotate('+(-tilt*1.7).toFixed(1)+'deg)"></div><div class="tc" style="top:'+t.y+'px;transform:rotate('+tilt+'deg)"><img src="tutorial/'+(i+1)+'.webp" alt="" draggable="false"><span class="fade"></span></div></div>'+bot+'</div>';
 };
 V.welcome.valid=function(){return !!(ui.nick||'').trim();};
 
